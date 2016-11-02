@@ -19,6 +19,7 @@
 					<th style="text-align: center">Vitamins</th>
 					<th style="text-align: center">Calories</th>
 					<th style="text-align: center">In Stock</th>
+					<th style="text-align: center">Type</th>
 					<th style="text-align: center">&nbsp;</th>
 				</tr>
 			</thead>
@@ -29,6 +30,7 @@
 					<td th:text="${ingredients.vitamins}"></td>
 					<td th:text="${ingredients.calories}"></td>
 					<td th:text="${ingredients.instock}"></td>
+					<td th:text="${ingredients.ingredientType}"></td>
 					<td><a href="/" th:href="@{|/ingredients/${ingredients.id}|}">View</a></td>
 				</tr>
 			</tbody>									
@@ -44,17 +46,19 @@
 					<th style="text-align: center">Vitamins</th>
 					<th style="text-align: center">Calories</th>
 					<th style="text-align: center">In Stock</th>
+					<th style="text-align: center">Type</th>
 					<th style="text-align: center">&nbsp;</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="veggies : ${veggies}" style="text-align: center">
-					<td th:text="${veggies.name}"></td>
-					<td th:text="${veggies.price}"></td>
-					<td th:text="${veggies.vitamins}"></td>
-					<td th:text="${veggies.calories}"></td>
-					<td th:text="${veggies.instock}"></td>
-					<td><a href="/" th:href="@{|/ingredients_v/${veggies.id}|}">View</a></td>
+				<tr th:each="ingredients : ${ingredients}" style="text-align: center">
+					<td th:text="${ingredients.name}"></td>
+					<td th:text="${ingredients.price}"></td>
+					<td th:text="${ingredients.vitamins}"></td>
+					<td th:text="${ingredients.calories}"></td>
+					<td th:text="${ingredients.instock}"></td>
+					<td th:text="${ingredients.ingredientType}"></td>
+					<td><a href="/" th:href="@{|/ingredients/${ingredients.id}|}">View</a></td>
 				</tr>
 			</tbody>						
 		</table>
@@ -67,17 +71,19 @@
 					<th style="text-align: center">Vitamins</th>
 					<th style="text-align: center">Calories</th>
 					<th style="text-align: center">In Stock</th>
+					<th style="text-align: center">Type</th>
 					<th style="text-align: center">&nbsp;</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="milk : ${milk}" style="text-align: center">
-					<td th:text="${milk.name}"></td>
-					<td th:text="${milk.price}"></td>
-					<td th:text="${milk.vitamins}"></td>
-					<td th:text="${milk.calories}"></td>
-					<td th:text="${milk.instock}"></td>
-					<td><a href="/" th:href="@{|/ingredients_m/${milk.id}|}">View</a></td>
+				<tr th:each="ingredients : ${ingredients}" style="text-align: center">
+					<td th:text="${ingredients.name}"></td>
+					<td th:text="${ingredients.price}"></td>
+					<td th:text="${ingredients.vitamins}"></td>
+					<td th:text="${ingredients.calories}"></td>
+					<td th:text="${ingredients.instock}"></td>
+					<td th:text="${ingredients.ingredientType}"></td>
+					<td><a href="/" th:href="@{|/ingredients/${ingredients.id}|}">View</a></td>
 				</tr>
 			</tbody>						
 		</table>
@@ -90,17 +96,19 @@
 					<th style="text-align: center">Vitamins</th>
 					<th style="text-align: center">Calories</th>
 					<th style="text-align: center">In Stock</th>
+					<th style="text-align: center">Type</th>
 					<th style="text-align: center">&nbsp;</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="yogurt : ${yogurt}" style="text-align: center">
-					<td th:text="${yogurt.name}"></td>
-					<td th:text="${yogurt.price}"></td>
-					<td th:text="${yogurt.vitamins}"></td>
-					<td th:text="${yogurt.calories}"></td>
-					<td th:text="${yogurt.instock}"></td>
-					<td><a href="/" th:href="@{|/ingredients_y/${yogurt.id}|}">View</a></td>
+				<tr th:each="ingredients : ${ingredients}" style="text-align: center">
+					<td th:text="${ingredients.name}"></td>
+					<td th:text="${ingredients.price}"></td>
+					<td th:text="${ingredients.vitamins}"></td>
+					<td th:text="${ingredients.calories}"></td>
+					<td th:text="${ingredients.instock}"></td>
+					<td th:text="${ingredients.ingredientType}"></td>
+					<td><a href="/" th:href="@{|/ingredients/${ingredients.id}|}">View</a></td>
 				</tr>
 			</tbody>						
 		</table>
@@ -113,21 +121,23 @@
 					<th style="text-align: center">Vitamins</th>
 					<th style="text-align: center">Calories</th>
 					<th style="text-align: center">In Stock</th>
+					<th style="text-align: center">Type</th>
 					<th style="text-align: center">&nbsp;</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="booze : ${booze}" style="text-align: center">
-					<td th:text="${booze.name}"></td>
-					<td th:text="${booze.price}"></td>
-					<td th:text="${booze.vitamins}"></td>
-					<td th:text="${booze.calories}"></td>
-					<td th:text="${booze.instock}"></td>
-					<td><a href="/" th:href="@{|/ingredients_b/${booze.id}|}">View</a></td>
+				<tr th:each="ingredients : ${ingredients}" style="text-align: center">
+					<td th:text="${ingredients.name}"></td>
+					<td th:text="${ingredients.price}"></td>
+					<td th:text="${ingredients.vitamins}"></td>
+					<td th:text="${ingredients.calories}"></td>
+					<td th:text="${ingredients.instock}"></td>
+					<td th:text="${ingredients.ingredientType}"></td>
+					<td><a href="/" th:href="@{|/ingredients/${ingredients.id}|}">View</a></td>
 				</tr>
 			</tbody>						
 		</table>
-		<button type="button"> <a href="ingredients/create_b">Add</a></button>
+		<button type="button"> <a href="ingredients/create">Add</a></button>
 	</div>
 </body>
 </html>

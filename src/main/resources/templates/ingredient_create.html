@@ -10,7 +10,7 @@
 		
 		<h1>Add Ingredient</h1>
 		
-		<form  th:object="${ingredient}" enctype="multipart/form-data">
+		<form method="POST"  th:object="${ingredients}" enctype="multipart/form-data">
 		
 			<div class="form-group">
 				<label for="name">Name</label> 
@@ -45,24 +45,21 @@
 			</div>
 			
 			<div>
-			 	<form:select path="ingredient">
-   					<form:option value="type" label="--- Select ---"/>
-   					<form:options items="${ingredientsList}" />
-				</form:select>
-				<select id="ingredient" name="ingredient">
-   					<option value="type">--- Select ---</option>
-				    <option value="ingredients">Fruit</option>
-				    <option value="veggies">Vegetable</option>
-				    <option value="milk">Milk</option>
-				    <option value="yogurt">Yogurt</option>
-				    <option value="booze">Alcohol</option>
+			 	
+				<select name="ingredientType">
+   					<option th:selected="*{ingredientType}" value="none">--- Select ---</option>
+				    <option th:selected="*{ingredientType}" value="fruit">Fruit</option>
+				    <option th:selected="*{ingredientType}" value="veggies">Vegetable</option>
+				    <option th:selected="*{ingredientType}" value="milk">Milk</option>
+				    <option th:selected="*{ingredientType}" value="yogurt">Yogurt</option>
+				    <option th:selected="*{ingredientType}" value="booze">Alcohol</option>
 				</select>
 			 </div>
 
 		
 			 
 			 
-			<button method="Post" th:object="${ingredientsList}" type="submit" class="btn btn-default">Submit</button>
+			<button type="submit" class="btn btn-default">Submit</button>
 		</form>
 
 	</div>

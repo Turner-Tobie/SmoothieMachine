@@ -1,60 +1,16 @@
 CREATE SCHEMA IF NOT EXISTS java301;
 USE java301 ;
 
-CREATE TABLE IF NOT EXISTS java301.ingredients_new (
-  id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  name VARCHAR(45) NOT NULL,
-  price VARCHAR(20) NOT NULL,
-  vitamins VARCHAR(45) NOT NULL,
-  calories VARCHAR(20) NULL,
-  instock tinyint(1) NOT NULL DEFAULT 1,
-  PRIMARY KEY (id));
-
 CREATE TABLE IF NOT EXISTS java301.ingredients (
   id INT UNSIGNED NOT NULL AUTO_INCREMENT,
   name VARCHAR(45) NOT NULL,
   price VARCHAR(20) NOT NULL,
   vitamins VARCHAR(45) NOT NULL,
   calories VARCHAR(20) NULL,
+  ingredient_type VARCHAR(15) NOT NULL,
   instock tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (id));
-  
-  CREATE TABLE IF NOT EXISTS java301.ingredients_milk (
-  id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  name VARCHAR(45) NOT NULL,
-  price VARCHAR(20) NOT NULL,
-  vitamins VARCHAR(45) NOT NULL,
-  calories VARCHAR(20) NULL,
-  instock tinyint(1) NOT NULL DEFAULT 1,
-  PRIMARY KEY (id));
-  
-  CREATE TABLE IF NOT EXISTS java301.ingredients_yogurt (
-  id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  name VARCHAR(45) NOT NULL,
-  price VARCHAR(20) NOT NULL,
-  vitamins VARCHAR(45) NOT NULL,
-  calories VARCHAR(20) NULL,
-  instock tinyint(1) NOT NULL DEFAULT 1,
-  PRIMARY KEY (id));
-  
-  CREATE TABLE IF NOT EXISTS java301.ingredients_alcohol (
-  id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  name VARCHAR(45) NOT NULL,
-  price VARCHAR(20) NOT NULL,
-  vitamins VARCHAR(45) NOT NULL,
-  calories VARCHAR(20) NULL,
-  instock tinyint(1) NOT NULL DEFAULT 1,
-  PRIMARY KEY (id));
-  
-  CREATE TABLE IF NOT EXISTS java301.ingredients_veggies (
-  id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  name VARCHAR(45) NOT NULL,
-  price VARCHAR(20) NOT NULL,
-  vitamins VARCHAR(45) NOT NULL,
-  calories VARCHAR(20) NULL,
-  instock tinyint(1) NOT NULL DEFAULT 1,
-  PRIMARY KEY (id));
-  
+   
   CREATE TABLE IF NOT EXISTS java301.users (
   id INT UNSIGNED NOT NULL AUTO_INCREMENT,
   first_name VARCHAR(45) NOT NULL,

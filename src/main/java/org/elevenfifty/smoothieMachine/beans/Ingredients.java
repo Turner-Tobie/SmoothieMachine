@@ -10,7 +10,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -24,17 +23,18 @@ public class Ingredients {
 	@Size(max = 45)
 	private String name;
 
-	@NotNull(message = "{price.notnull}")
 	@DecimalMin(value = "0", message = "")
 	@DecimalMax(value = "100", message = "")
 	private BigDecimal price;
 
 	@Size(max = 45)
 	private String vitamins;
-
-	@NotNull(message = "{price.notnull}")
+	
 	@Min(value = 0, message = "")	
 	private int calories;
+	
+	@Size(max= 20)
+	private String ingredientType;
 	
 	private boolean instock;
 
@@ -98,6 +98,14 @@ public class Ingredients {
 
 	public void setCalories(int calories) {
 		this.calories = calories;
+	}
+	
+	public String getIngredientType() {
+		return ingredientType;
+	}
+
+	public void setIngredientType(String ingredientType) {
+		this.ingredientType = ingredientType;
 	}
 
 	public boolean isInstock() {
