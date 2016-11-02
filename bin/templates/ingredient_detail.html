@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layouts/basic">
+<head>
+<title>Getting Started: Serving Web Content</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body layout:fragment="content">
+	<div class="row">
+		<h1>Fruit</h1>
+		<div th:if="${ingredients}">
+			
+			<ul th:object="${ingredients}">
+				<li th:text="*{name}"></li>
+				<li th:text="*{vitamins}"></li>
+				<li th:text="*{calories}"></li>
+				<li th:text="*{price}"></li>
+				<li th:text="*{instock}"></li>
+				<li><a href="/" th:href="@{|/ingredients/${ingredients.id}/edit|}">Edit</a></li>
+			</ul>
+		</div>
+		
+		<div th:unless="${user}">
+			<h3>No user found</h3>
+		</div>
+		<a href="/ingredients">Back</a>
+	</div>
+</body>
+</html>
