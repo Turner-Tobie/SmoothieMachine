@@ -3,12 +3,19 @@ USE java301 ;
 
 CREATE TABLE IF NOT EXISTS java301.ingredients (
   id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  name VARCHAR(45) NOT NULL,
+  name VARCHAR(128) NOT NULL,
   price VARCHAR(20) NOT NULL,
   vitamins VARCHAR(45) NOT NULL,
   calories VARCHAR(20) NULL,
   ingredient_type VARCHAR(15) NOT NULL,
   instock tinyint(1) NOT NULL DEFAULT 1,
+  PRIMARY KEY (id));  
+ 
+  CREATE TABLE IF NOT EXISTS java301.ingredients_properties (
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  ingredients_id INT UNSIGNED NOT NULL,
+  prop_name VARCHAR(45) NOT NULL,
+  prop_value VARCHAR(255) NOT NULL,
   PRIMARY KEY (id));
    
   CREATE TABLE IF NOT EXISTS java301.users (

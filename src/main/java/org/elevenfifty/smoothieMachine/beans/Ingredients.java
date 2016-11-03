@@ -20,7 +20,7 @@ public class Ingredients {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
-	@Size(max = 45)
+	@Size(max = 128)
 	private String name;
 
 	@DecimalMin(value = "0", message = "")
@@ -36,7 +36,7 @@ public class Ingredients {
 	@Size(max= 20)
 	private String ingredientType;
 	
-	private boolean instock;
+	private boolean instock;	
 
 	@Override
 	public int hashCode() {
@@ -101,6 +101,10 @@ public class Ingredients {
 	}
 	
 	public String getIngredientType() {
+//		if(ingredientType == "fruit"){
+//			ingredientType = 
+//			return ingredientTypeFruit;
+//		}
 		return ingredientType;
 	}
 

@@ -24,7 +24,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="ingredients : ${ingredients}" style="text-align: center">
+				<tr  th:each="ingredients : ${ingredients}" value='fruit' style="text-align: center">
 					<td th:text="${ingredients.name}"></td>
 					<td th:text="${ingredients.price}"></td>
 					<td th:text="${ingredients.vitamins}"></td>
@@ -62,6 +62,7 @@
 				</tr>
 			</tbody>						
 		</table>
+		<button type="button"> <a href="ingredients/create">Add</a></button>
 		<h3 style="text-align: center">Milk</h3>
 		<table style="width:100%" border="2">
 			<thead>
@@ -87,6 +88,7 @@
 				</tr>
 			</tbody>						
 		</table>
+		<button type="button"> <a href="ingredients/create">Add</a></button>
 		<h3 style="text-align: center">Yogurt</h3>
 		<table style="width:100%" border="2">
 			<thead>
@@ -112,6 +114,7 @@
 				</tr>
 			</tbody>						
 		</table>
+		<button type="button"> <a href="ingredients/create">Add</a></button>
 		<h3 style="text-align: center">Alcohol</h3>
 		<table style="width:100%" border="2">
 			<thead>

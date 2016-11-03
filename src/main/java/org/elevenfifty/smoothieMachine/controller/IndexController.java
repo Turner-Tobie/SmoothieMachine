@@ -29,10 +29,10 @@ public class IndexController {
 
 	@Autowired
 	private UserRepository userRepo;
-	
+
 	@Autowired
 	private IngredientsRepository ingredientsRepo;
-	
+
 	@Autowired
 	private UserImageRepository userImageRepo;
 
@@ -61,7 +61,7 @@ public class IndexController {
 
 	@GetMapping(path = { "/ingredients" })
 	public String ingredients(Model model) {
-		model.addAttribute("ingredients", ingredientsRepo.findAll());		
+		model.addAttribute("ingredients", ingredientsRepo.findAll());
 		return "ingredients";
 	}
 
@@ -98,19 +98,19 @@ public class IndexController {
 		ingredientsRepo.save(ingredients);
 		return "redirect:/ingredients/" + ingredients.getId();
 
-	}	
-	
+	}
+
 	@GetMapping("/ingredients/create")
 	public String ingredientCreate(@ModelAttribute @Valid Ingredients ingredients, Model model) {
 		return "ingredient_create";
 	}
-	
+
 	@PostMapping("/ingredients/create")
-    public String ingredientCreateSave(@ModelAttribute @Valid Ingredients ingredients, Model model) {
-		
-        ingredientsRepo.save(ingredients);
-            return "redirect:/ingredients/";
-    }		
+	public String ingredientCreateSave(@ModelAttribute @Valid Ingredients ingredients, Model model) {
+		//ingredientsRolesRepo.save(ingredientsRole);
+		ingredientsRepo.save(ingredients);
+		return "redirect:/ingredients/";
+	}
 
 	@GetMapping("/user/{id}")
 	public String user(Model model, @PathVariable(name = "id") long id) {
@@ -185,20 +185,18 @@ public class IndexController {
 		// return "user_edit";
 
 	}
-	
+
 	@GetMapping("/user/create")
 	public String userCreate(@ModelAttribute @Valid Users user, Model model) {
-		
+
 		return "user_create";
 	}
-	
-	@PostMapping("/user/create")
-    public String userCreateSave(@ModelAttribute @Valid Users user, Model model) {
 
-        userRepo.save(user);
-            return "redirect:/user/" + user.getId();
-    }
-	
-	
+	@PostMapping("/user/create")
+	public String userCreateSave(@ModelAttribute @Valid Users user, Model model) {
+
+		userRepo.save(user);
+		return "redirect:/user/" + user.getId();
+	}
 
 }
