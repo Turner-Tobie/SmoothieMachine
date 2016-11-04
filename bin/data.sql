@@ -50,6 +50,59 @@ insert into java301.ingredients (name, price, vitamins, calories, ingredient_typ
 insert into java301.ingredients (name, price, vitamins, calories, ingredient_type, instock) values ('Tomatoe', '.75', 'A,B', '25', 'vegetable', true);
 insert into java301.ingredients (name, price, vitamins, calories, ingredient_type, instock) values ('Zucchini', '.75', 'A,B', '25', 'vegetable', true);
 
+insert into java301.ingredient_roles (ingredient_id, role) values ((select id from java301.ingredients where name = 'Apple'), 'fruit');
+insert into java301.ingredient_roles (ingredient_id, role) values ((select id from java301.ingredients where name = 'Banana'), 'fruit');
+insert into java301.ingredient_roles (ingredient_id, role) values ((select id from java301.ingredients where name = 'Cantalope'), 'fruit');
+insert into java301.ingredient_roles (ingredient_id, role) values ((select id from java301.ingredients where name = 'Grapefruit'), 'fruit');
+insert into java301.ingredient_roles (ingredient_id, role) values ((select id from java301.ingredients where name = 'Kiwi'), 'fruit');
+insert into java301.ingredient_roles (ingredient_id, role) values ((select id from java301.ingredients where name = 'Lemon'), 'fruit');
+insert into java301.ingredient_roles (ingredient_id, role) values ((select id from java301.ingredients where name = 'Orange'), 'fruit');
+insert into java301.ingredient_roles (ingredient_id, role) values ((select id from java301.ingredients where name = 'Pear'), 'fruit');
+insert into java301.ingredient_roles (ingredient_id, role) values ((select id from java301.ingredients where name = 'Pineapple'), 'fruit');
+insert into java301.ingredient_roles (ingredient_id, role) values ((select id from java301.ingredients where name = 'Watermelon'), 'fruit');
+insert into java301.ingredient_roles (ingredient_id, role) values ((select id from java301.ingredients where name = 'Apricot'), 'fruit');
+insert into java301.ingredient_roles (ingredient_id, role) values ((select id from java301.ingredients where name = 'Cherry'), 'fruit');
+insert into java301.ingredient_roles (ingredient_id, role) values ((select id from java301.ingredients where name = 'Grape'), 'fruit');
+insert into java301.ingredient_roles (ingredient_id, role) values ((select id from java301.ingredients where name = 'Mango'), 'fruit');
+insert into java301.ingredient_roles (ingredient_id, role) values ((select id from java301.ingredients where name = 'Nectarine'), 'fruit');
+insert into java301.ingredient_roles (ingredient_id, role) values ((select id from java301.ingredients where name = 'Peach'), 'fruit');
+insert into java301.ingredient_roles (ingredient_id, role) values ((select id from java301.ingredients where name = 'Plum'), 'fruit');
+insert into java301.ingredient_roles (ingredient_id, role) values ((select id from java301.ingredients where name = 'Acai'), 'fruit');
+insert into java301.ingredient_roles (ingredient_id, role) values ((select id from java301.ingredients where name = 'Bil berry'), 'fruit');
+insert into java301.ingredient_roles (ingredient_id, role) values ((select id from java301.ingredients where name = 'Black berry'), 'fruit');
+insert into java301.ingredient_roles (ingredient_id, role) values ((select id from java301.ingredients where name = 'Blue berry'), 'fruit');
+insert into java301.ingredient_roles (ingredient_id, role) values ((select id from java301.ingredients where name = 'Cranberry'), 'fruit');
+insert into java301.ingredient_roles (ingredient_id, role) values ((select id from java301.ingredients where name = 'Rasberry'), 'fruit');
+
+
+insert into java301.ingredient_roles (ingredient_id, role) values ((select id from java301.ingredients where name = '2% Milk'), 'milk');
+insert into java301.ingredient_roles (ingredient_id, role) values ((select id from java301.ingredients where name = '1% Milk'), 'milk');
+insert into java301.ingredient_roles (ingredient_id, role) values ((select id from java301.ingredients where name = 'Skim Milk'), 'milk');
+insert into java301.ingredient_roles (ingredient_id, role) values ((select id from java301.ingredients where name = 'Whole Milk'), 'milk');
+insert into java301.ingredient_roles (ingredient_id, role) values ((select id from java301.ingredients where name = 'Soy Milk'), 'milk');
+insert into java301.ingredient_roles (ingredient_id, role) values ((select id from java301.ingredients where name = 'Lactose Free Milk'), 'milk');
+
+insert into java301.ingredient_roles (ingredient_id, role) values ((select id from java301.ingredients where name = 'Beet'), 'vegetable');
+insert into java301.ingredient_roles (ingredient_id, role) values ((select id from java301.ingredients where name = 'Carrot'), 'vegetable');
+insert into java301.ingredient_roles (ingredient_id, role) values ((select id from java301.ingredients where name = 'Jicama'), 'vegetable');
+insert into java301.ingredient_roles (ingredient_id, role) values ((select id from java301.ingredients where name = 'Kale'), 'vegetable');
+insert into java301.ingredient_roles (ingredient_id, role) values ((select id from java301.ingredients where name = 'Snowpeas'), 'vegetable');
+insert into java301.ingredient_roles (ingredient_id, role) values ((select id from java301.ingredients where name = 'Spinach'), 'vegetable');
+insert into java301.ingredient_roles (ingredient_id, role) values ((select id from java301.ingredients where name = 'Squash'), 'vegetable');
+insert into java301.ingredient_roles (ingredient_id, role) values ((select id from java301.ingredients where name = 'Sunchoke'), 'vegetable');
+insert into java301.ingredient_roles (ingredient_id, role) values ((select id from java301.ingredients where name = 'Sweet Potatoe'), 'vegetable');
+insert into java301.ingredient_roles (ingredient_id, role) values ((select id from java301.ingredients where name = 'Tomatoe'), 'vegetable');
+insert into java301.ingredient_roles (ingredient_id, role) values ((select id from java301.ingredients where name = 'Zucchini'), 'vegetable');
+
+insert into java301.ingredient_roles (ingredient_id, role) values ((select id from java301.ingredients where name = 'Whiskey'), 'alcohol');
+insert into java301.ingredient_roles (ingredient_id, role) values ((select id from java301.ingredients where name = 'Vodka'), 'alcohol');
+insert into java301.ingredient_roles (ingredient_id, role) values ((select id from java301.ingredients where name = 'Rum'), 'alcohol');
+
+insert into java301.ingredient_roles (ingredient_id, role) values ((select id from java301.ingredients where name = 'Reduced Fat Yogurt'), 'yogurt');
+insert into java301.ingredient_roles (ingredient_id, role) values ((select id from java301.ingredients where name = 'Fat Free Yogurt'), 'yogurt');
+insert into java301.ingredient_roles (ingredient_id, role) values ((select id from java301.ingredients where name = 'Lactose Free Yogurt'), 'yogurt');
+insert into java301.ingredient_roles (ingredient_id, role) values ((select id from java301.ingredients where name = 'Whole Yogurt'), 'yogurt');
+
 insert into java301.users (first_name, last_name, password, email, phone_number, active) values ('Zach', 'Smith', 'abc123', 'zsmith@smoothie.com', '1234567890', true);
 
 insert into java301.user_roles (user_id, role) values ((select id from java301.users where email = 'zsmith@smoothie.com'), 'USER');

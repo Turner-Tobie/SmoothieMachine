@@ -10,6 +10,12 @@ CREATE TABLE IF NOT EXISTS java301.ingredients (
   ingredient_type VARCHAR(15) NOT NULL,
   instock tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (id));
+  
+  CREATE TABLE IF NOT EXISTS java301.ingredient_roles (
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  ingredient_id INT UNSIGNED NOT NULL,
+  role VARCHAR(45) NOT NULL,
+  PRIMARY KEY (id));
    
   CREATE TABLE IF NOT EXISTS java301.users (
   id INT UNSIGNED NOT NULL AUTO_INCREMENT,
