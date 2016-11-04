@@ -27,6 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 public class IndexController {
 
+
 	@Autowired
 	private UserRepository userRepo;
 
@@ -60,8 +61,11 @@ public class IndexController {
 	}
 
 	@GetMapping(path = { "/ingredients" })
-	public String ingredients(Model model) {
+	public String ingredients(Model model, Ingredients ingredients ) {
+							
+		model.addAttribute("ingredientType", ingredientsRepo.findAll().equals(ingredients.getIngredientType()));		
 		model.addAttribute("ingredients", ingredientsRepo.findAll());
+		
 		return "ingredients";
 	}
 

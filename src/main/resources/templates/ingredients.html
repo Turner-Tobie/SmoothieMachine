@@ -23,8 +23,8 @@
 					<th style="text-align: center">&nbsp;</th>
 				</tr>
 			</thead>
-			<tbody>
-				<tr  th:each="ingredients : ${ingredients}" value='fruit' style="text-align: center">
+			<tbody th:each="ingredients : ${ingredients}">
+				<tr th:class="${ingredients}? (${ingredients.isHasIngredientType()}? 'ingredientType' : 'fruit'):'alt'" style="text-align: center">
 					<td th:text="${ingredients.name}"></td>
 					<td th:text="${ingredients.price}"></td>
 					<td th:text="${ingredients.vitamins}"></td>

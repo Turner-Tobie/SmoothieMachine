@@ -9,6 +9,7 @@ CREATE TABLE IF NOT EXISTS java301.ingredients (
   calories VARCHAR(20) NULL,
   ingredient_type VARCHAR(15) NOT NULL,
   instock tinyint(1) NOT NULL DEFAULT 1,
+  has_ingredient_type tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (id));  
  
   CREATE TABLE IF NOT EXISTS java301.ingredients_properties (

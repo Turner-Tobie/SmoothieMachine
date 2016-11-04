@@ -1,6 +1,7 @@
 package org.elevenfifty.smoothieMachine.beans;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,9 +13,11 @@ import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
+import org.hibernate.mapping.Array;
+
 @Entity
 @Table(name = "ingredients")
-public class Ingredients {
+public class Ingredients<ingredientType, hasIngredientType> {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -36,7 +39,9 @@ public class Ingredients {
 	@Size(max= 20)
 	private String ingredientType;
 	
-	private boolean instock;	
+	private boolean instock;
+	
+	private boolean hasIngredientType;
 
 	@Override
 	public int hashCode() {
@@ -100,12 +105,18 @@ public class Ingredients {
 		this.calories = calories;
 	}
 	
-	public String getIngredientType() {
-//		if(ingredientType == "fruit"){
-//			ingredientType = 
-//			return ingredientTypeFruit;
-//		}
+	public String getIngredientType() {		
 		return ingredientType;
+		
+	}
+
+	public boolean isHasIngredientType() {
+		if(this.ingredientType != null){
+		return true;
+		}else{
+			hasIngredientType=true;
+			return isHasIngredientType();
+		}
 	}
 
 	public void setIngredientType(String ingredientType) {
@@ -119,6 +130,8 @@ public class Ingredients {
 	public void setInstock(boolean instock) {
 		this.instock = instock;
 	}
+
+	
 	
 	
 }
