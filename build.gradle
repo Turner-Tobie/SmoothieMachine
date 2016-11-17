@@ -46,9 +46,4 @@ task wrapper(type: Wrapper) {
 task stage(dependsOn: ['build', 'clean'])
 build.mustRunAfter clean
 
-task copyToLib(type: Copy) {
-  into "$buildDir/lib"
-  from(configurations.compile)
-}
-
 stage.dependsOn(copyToLib)
