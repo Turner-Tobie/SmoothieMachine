@@ -45,5 +45,3 @@ task wrapper(type: Wrapper) {
 
 task stage(dependsOn: ['build', 'clean'])
 build.mustRunAfter clean
-
-stage.dependsOn(copyToLib)

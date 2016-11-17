@@ -1,0 +1,55 @@
+CREATE SCHEMA IF NOT EXISTS java301;
+USE java301 ;
+
+CREATE TABLE IF NOT EXISTS java301.ingredients (
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  name VARCHAR(45) NOT NULL,
+  price VARCHAR(20) NOT NULL,
+  vitamins VARCHAR(45) NOT NULL,
+  calories VARCHAR(20) NULL,
+  ingredient_type VARCHAR(15) NOT NULL,
+  instock tinyint(1) NOT NULL DEFAULT 1,
+  PRIMARY KEY (id));
+  
+  CREATE TABLE IF NOT EXISTS java301.ingredient_roles (
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  ingredient_id INT UNSIGNED NOT NULL,
+  role VARCHAR(45) NOT NULL,
+  PRIMARY KEY (id));
+   
+  CREATE TABLE IF NOT EXISTS java301.users (
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  first_name VARCHAR(45) NOT NULL,
+  last_name VARCHAR(45) NOT NULL,
+  password VARCHAR(45) NOT NULL,
+  email VARCHAR(128) NULL,
+  phone_number VARCHAR(10) NULL,
+  active tinyint(1) NOT NULL DEFAULT 1,
+  PRIMARY KEY (id));
+  
+  CREATE TABLE IF NOT EXISTS java301.user_roles (
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  user_id INT UNSIGNED NOT NULL,
+  role VARCHAR(45) NOT NULL,
+  PRIMARY KEY (id));
+  
+  CREATE TABLE IF NOT EXISTS java301.user_properties (
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  user_id INT UNSIGNED NOT NULL,
+  prop_name VARCHAR(45) NOT NULL,
+  prop_value VARCHAR(255) NOT NULL,
+  PRIMARY KEY (id));
+  
+  CREATE TABLE IF NOT EXISTS java301.user_images (
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  user_id INT UNSIGNED NOT NULL,
+  content_type VARCHAR(45) NOT NULL,
+  image BLOB NOT NULL,
+  PRIMARY KEY (id));
+  
+--  CREATE TABLE IF NOT EXISTS java301.transactions(
+--  id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+--  customer_id VARCHAR(16) NOT NULL,
+--  product_id VARCHAR(16) NOT NULL,
+--  transaction_date VARCHAR(40) NOT NULL,
+--  PRIMARY KEY (id));

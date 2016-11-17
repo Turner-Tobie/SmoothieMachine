@@ -1,0 +1,146 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layouts/basic">
+<head>
+<title>Getting Started: Serving Web Content</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body layout:fragment="content">
+	<div class="row">
+		<h1 style="text-align: center">Ingredients</h1>
+		
+		
+		
+		<h3 style="text-align: center">Fruit</h3>
+		<table style="width:100%" border="2">
+			<thead>
+				<tr>
+					<th style="text-align: center">Name</th>
+					<th style="text-align: center">Price</th>
+					<th style="text-align: center">Vitamins</th>
+					<th style="text-align: center">Calories</th>
+					<th style="text-align: center">In Stock</th>
+					<th style="text-align: center">Type</th>
+					<th style="text-align: center">&nbsp;</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="fruit : ${fruit}" th:value="FRUIT" style="text-align: center">
+					<td th:text="${fruit.name}"></td>
+					<td th:text="${fruit.price}"></td>
+					<td th:text="${fruit.vitamins}"></td>
+					<td th:text="${fruit.calories}"></td>
+					<td th:text="${fruit.instock}"></td>
+					<td th:text="${fruit.ingredientType}"></td>
+					<td><a href="/" th:href="@{|/ingredients/${fruit.id}|}">View</a></td>
+				</tr>
+			</tbody>									
+		</table >
+		<button type="button"> <a href="ingredients/create">Add</a></button>
+		
+		<h3 style="text-align: center">Vegetables</h3>
+		<table style="width:100%" border="2">
+			<thead>
+				<tr>
+					<th style="text-align: center">Name</th>
+					<th style="text-align: center">Price</th>
+					<th style="text-align: center">Vitamins</th>
+					<th style="text-align: center">Calories</th>
+					<th style="text-align: center">In Stock</th>
+					<th style="text-align: center">Type</th>
+					<th style="text-align: center">&nbsp;</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="vegetable : ${vegetable}"  style="text-align: center">
+					<td th:text="${vegetable.name}"></td>
+					<td th:text="${vegetable.price}"></td>
+					<td th:text="${vegetable.vitamins}"></td>
+					<td th:text="${vegetable.calories}"></td>
+					<td th:text="${vegetable.instock}"></td>
+					<td th:text="${vegetable.ingredientType}"></td>
+					<td><a href="/" th:href="@{|/ingredients/${vegetable.id}|}">View</a></td>
+				</tr>
+			</tbody>						
+		</table>
+		<button type="button"> <a href="ingredients/create">Add</a></button>
+		<h3 style="text-align: center">Milk</h3>
+		<table style="width:100%" border="2">
+			<thead>
+				<tr>
+					<th style="text-align: center">Name</th>
+					<th style="text-align: center">Price</th>
+					<th style="text-align: center">Vitamins</th>
+					<th style="text-align: center">Calories</th>
+					<th style="text-align: center">In Stock</th>
+					<th style="text-align: center">Type</th>
+					<th style="text-align: center">&nbsp;</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="milk : ${milk}"  style="text-align: center">
+					<td th:text="${milk.name}"></td>
+					<td th:text="${milk.price}"></td>
+					<td th:text="${milk.vitamins}"></td>
+					<td th:text="${milk.calories}"></td>
+					<td th:text="${milk.instock}"></td>
+					<td th:text="${milk.ingredientType}"></td>
+					<td><a href="/" th:href="@{|/ingredients/${milk.id}|}">View</a></td>
+				</tr>
+			</tbody>						
+		</table>
+		<button type="button"> <a href="ingredients/create">Add</a></button>
+		<h3 style="text-align: center">Yogurt</h3>
+		<table style="width:100%" border="2">
+			<thead>
+				<tr>
+					<th style="text-align: center">Name</th>
+					<th style="text-align: center">Price</th>
+					<th style="text-align: center">Vitamins</th>
+					<th style="text-align: center">Calories</th>
+					<th style="text-align: center">In Stock</th>
+					<th style="text-align: center">Type</th>
+					<th style="text-align: center">&nbsp;</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="yogurt : ${yogurt}" style="text-align: center">
+					<td th:text="${yogurt.name}"></td>
+					<td th:text="${yogurt.price}"></td>
+					<td th:text="${yogurt.vitamins}"></td>
+					<td th:text="${yogurt.calories}"></td>
+					<td th:text="${yogurt.instock}"></td>
+					<td th:text="${yogurt.ingredientType}"></td>
+					<td><a href="/" th:href="@{|/ingredients/${yogurt.id}|}">View</a></td>
+				</tr>
+			</tbody>						
+		</table>
+		<button type="button"> <a href="ingredients/create">Add</a></button>
+		<h3 style="text-align: center">Alcohol</h3>
+		<table style="width:100%" border="2">
+			<thead>
+				<tr>
+					<th style="text-align: center">Name</th>
+					<th style="text-align: center">Price</th>
+					<th style="text-align: center">Vitamins</th>
+					<th style="text-align: center">Calories</th>
+					<th style="text-align: center">In Stock</th>
+					<th style="text-align: center">Type</th>
+					<th style="text-align: center">&nbsp;</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="alcohol : ${alcohol}" style="text-align: center">
+					<td th:text="${alcohol.name}"></td>
+					<td th:text="${alcohol.price}"></td>
+					<td th:text="${alcohol.vitamins}"></td>
+					<td th:text="${alcohol.calories}"></td>
+					<td th:text="${alcohol.instock}"></td>
+					<td th:text="${alcohol.ingredientType}"></td>
+					<td><a href="/" th:href="@{|/ingredients/${alcohol.id}|}">View</a></td>
+				</tr>
+			</tbody>						
+		</table>
+		<button type="button"> <a href="ingredients/create">Add</a></button>
+	</div>
+</body>
+</html>

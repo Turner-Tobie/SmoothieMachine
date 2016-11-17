@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layouts/basic">
+<head>
+<title>Getting Started: Serving Web Content</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body layout:fragment="content">
+	<div class="row">
+		<h1 style="text-align: center">Users</h1>
+
+		<table style="width:100%" border="2">
+			<thead>
+				<tr >
+					<th style="text-align: center">First Name</th>
+					<th style="text-align: center">Last Name</th>
+					<th style="text-align: center">Email</th>
+					<th style="text-align: center">Phone</th>
+					<th style="text-align: center">Active</th>
+					<th style="text-align: center">&nbsp;</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="user : ${users}" style="text-align: center">
+					<td th:text="${user.firstName}"></td>
+					<td th:text="${user.lastName}"></td>
+					<td th:text="${user.email}"></td>
+					<td th:text="${user.phoneNumber}"></td>
+					<td th:text="${user.active}"></td>
+					<td><a href="/" th:href="@{|/user/${user.id}|}">View</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
