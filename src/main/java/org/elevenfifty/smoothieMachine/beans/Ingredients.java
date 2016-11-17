@@ -37,6 +37,25 @@ public class Ingredients {
 	private String ingredientType;
 	
 	private boolean instock;
+	
+	private Ingredients(){
+		
+	}
+	
+	public Ingredients(String name, BigDecimal price, String vitamins, int calories, String ingredientType, boolean instock){
+		this.name = name;
+		this.price = price;
+		this.vitamins = vitamins;
+		this.calories = calories;
+		this.ingredientType = ingredientType;
+		this.instock = instock;
+	}
+		
+	@Override
+	public String toString() {
+		return "Ingredients [id=" + id + ", name=" + name + ", price=" + price + ", vitamins=" + vitamins
+				+ ", calories=" + calories + ", ingredientType=" + ingredientType + ", instock=" + instock + "]";
+	}
 
 	@Override
 	public int hashCode() {

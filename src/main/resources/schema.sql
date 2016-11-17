@@ -46,3 +46,10 @@ CREATE TABLE IF NOT EXISTS java301.ingredients (
   content_type VARCHAR(45) NOT NULL,
   image BLOB NOT NULL,
   PRIMARY KEY (id));
+  
+--  CREATE TABLE IF NOT EXISTS java301.transactions(
+--  id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+--  customer_id VARCHAR(16) NOT NULL,
+--  product_id VARCHAR(16) NOT NULL,
+--  transaction_date VARCHAR(40) NOT NULL,
+--  PRIMARY KEY (id));
