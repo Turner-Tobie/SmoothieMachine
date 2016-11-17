@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layouts/basic">
+<head>
+<title>Getting Started: Serving Web Content</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body layout:fragment="content">
+	<h1>Custom Smoothie</h1>
+
+	<form method="POST" th:object="${ingredients}"
+		encrypt="multipart/form-data">
+
+
+		<h2>Base Ingredient</h2>
+		<h3>Water</h3>
+		<label><input type="checkbox" /></label>
+		<div>
+			<h3>Milk</h3>
+			<select name="milk">
+				<option value="none">--select--</option>
+				<option th:each="milk : ${milk}" th:text="${milk.name}"></option>
+			</select>
+		</div>
+
+		<div>
+			<h3>Yogurt</h3>
+			<select>
+				<option value="none">--select--</option>
+				<option th:each="yogurt : ${yogurt}" th:text="${yogurt.name}"></option>
+			</select>
+		</div>
+		
+		<div>
+			<h3>Alcohol</h3>
+			<select >
+				<option value="none">--select--</option>
+				<option th:each="alcohol : ${alcohol}" th:text="${alcohol.name}"></option>
+			</select>
+		</div>
+
+		<h2>Main Ingredient</h2>
+		<div class="container">
+			<div class="row" >
+				<div class="col-md-4">
+					<h3>Fruit</h3>
+					<label th:field="*{fruit}"><input style="width:48%" type="checkbox" th:each="fruit : ${fruit}"
+						th:text="${fruit.name}" /></label>
+				</div>
+				<div class="col-md-4">
+					<h3>Vegetable</h3>
+					<label th:field="*{vegetable}"><input style="width:48%"  type="checkbox"
+						th:each="vegetable : ${vegetable}" th:text="${vegetable.name}" /></label>
+				</div>
+			</div>
+		</div>		
+	</form>
+	<button type="button"> <a href="purchase">Order</a></button>
+	<a href="/">Back</a>
+</body>
+</html>

@@ -2,23 +2,22 @@ package org.elevenfifty.smoothieMachine.controller;
 
 import java.io.IOException;
 
+import javax.management.relation.Role;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import static org.elevenfifty.smoothieMachine.security.IngredientRole.FRUIT;
+import static org.elevenfifty.smoothieMachine.security.IngredientRole.ALCOHOL;
+import static org.elevenfifty.smoothieMachine.security.IngredientRole.MILK;
+import static org.elevenfifty.smoothieMachine.security.IngredientRole.VEGETABLE;
+import static org.elevenfifty.smoothieMachine.security.IngredientRole.YOGURT;
+
+import org.elevenfifty.smoothieMachine.beans.IngredientRoles;
 import org.elevenfifty.smoothieMachine.beans.Ingredients;
-import org.elevenfifty.smoothieMachine.beans.IngredientsAlcohol;
-import org.elevenfifty.smoothieMachine.beans.IngredientsMilk;
-import org.elevenfifty.smoothieMachine.beans.IngredientsNew;
-import org.elevenfifty.smoothieMachine.beans.IngredientsVeggies;
-import org.elevenfifty.smoothieMachine.beans.IngredientsYogurt;
 import org.elevenfifty.smoothieMachine.beans.UserImage;
 import org.elevenfifty.smoothieMachine.beans.Users;
-import org.elevenfifty.smoothieMachine.repository.BoozeRepository;
-import org.elevenfifty.smoothieMachine.repository.IngredientsNewRepository;
-import org.elevenfifty.smoothieMachine.repository.IngredientsRepository;
-import org.elevenfifty.smoothieMachine.repository.MilkRepository;
-import org.elevenfifty.smoothieMachine.repository.VegetablesRepository;
-import org.elevenfifty.smoothieMachine.repository.YogurtRepository;
+import org.elevenfifty.smoothieMachine.repository.IngredientRepository;
+import org.elevenfifty.smoothieMachine.repository.IngredientRoleRepository;
 import org.elevenfifty.smoothieMachine.repository.UserImageRepository;
 import org.elevenfifty.smoothieMachine.repository.UserRepository;
 import org.slf4j.Logger;
@@ -39,28 +38,17 @@ public class IndexController {
 
 	@Autowired
 	private UserRepository userRepo;
-
-	@Autowired
-	private IngredientsNewRepository ingredientsNewRepo;
 	
 	@Autowired
-	private IngredientsRepository ingredientsRepo;
-
-	@Autowired
-	private VegetablesRepository veggiesRepo;
-
-	@Autowired
-	private MilkRepository milkRepo;
-
-	@Autowired
-	private YogurtRepository yogurtRepo;
-
-	@Autowired
-	private BoozeRepository boozeRepo;
-
+	private IngredientRepository ingredientsRepo;
+	
 	@Autowired
 	private UserImageRepository userImageRepo;
+	
+	@Autowired
+	private IngredientRoleRepository ingredientRoleRepo;
 
+	
 	@GetMapping("")
 	public String index(Model model, HttpServletRequest request) {
 		return "index";
@@ -84,210 +72,85 @@ public class IndexController {
 		return "home";
 	}
 
-	@GetMapping(path = { "/ingredients" })
-	public String ingredients(Model model) {
-		model.addAttribute("ingredients", ingredientsRepo.findAll());
-		model.addAttribute("veggies", veggiesRepo.findAll());
-		model.addAttribute("booze", boozeRepo.findAll());
-		model.addAttribute("yogurt", yogurtRepo.findAll());
-		model.addAttribute("milk", milkRepo.findAll());
-		return "ingredients";
-	}
-
-	@GetMapping("/ingredients/{id}")
-	public String ingredients(Model model, @PathVariable(name = "id") long id) {
-
-		model.addAttribute("id", id);
-
-		Ingredients u = ingredientsRepo.findOne(id);
-		model.addAttribute("ingredients", u);
-
-		UserImage i = userImageRepo.findByUserId(id);
-		model.addAttribute("userImage", i);
-
-		return "ingredient_detail";
-	}
-
-	@GetMapping("/ingredients/{id}/edit")
-	public String ingredientEdit(Model model, @PathVariable(name = "id") long id) {
-
-		Ingredients u = ingredientsRepo.findOne(id);
-		model.addAttribute("ingredients", u);
-
-		model.addAttribute("id", id);
-		return "ingredient_edit";
-	}
-
-	@PostMapping("/ingredients/{id}/edit")
-	public String ingredientsEditSave(@PathVariable(name = "id") long id,
-			@ModelAttribute @Valid Ingredients ingredients, BindingResult result, Model model) {
-
-		if (result.hasErrors()) {
-			model.addAttribute("ingredients", ingredients);
-			return "ingredients_edit";
-
-		}
-		ingredientsRepo.save(ingredients);
-		return "redirect:/ingredients/" + ingredients.getId();
-
-	}
-
-
-	@GetMapping("/ingredients_y/{id}")
-	public String ingredientsYogurt(Model model, @PathVariable(name = "id") long id) {
-
-		model.addAttribute("id", id);
-
-		IngredientsYogurt y = yogurtRepo.findOne(id);
-		model.addAttribute("yogurt", y);
-		return "ingredient_detail_y";
-
-	}
-
-	@GetMapping("/ingredients_y/{id}/edit")
-	public String ingredientsYogurtEdit(Model model, @PathVariable(name = "id") long id) {
-
-		IngredientsYogurt y = yogurtRepo.findOne(id);
-		model.addAttribute("yogurt", y);
-
-		model.addAttribute("id", id);
-		return "ingredient_edit_y";
-	}
-
-	@PostMapping("/ingredients_y/{id}/edit")
-	public String ingredientsYogurtEditSave(@PathVariable(name = "id") long id,
-			@ModelAttribute @Valid IngredientsYogurt yogurt, BindingResult result, Model model) {
-
-		if (result.hasErrors()) {
-			model.addAttribute("yogurt", yogurt);
-			return "ingredients_edit_y";
-
-		}
-		yogurtRepo.save(yogurt);
-		return "redirect:/ingredients_y/" + yogurt.getId();
-
-	}
-
-	@GetMapping("/ingredients_m/{id}")
-	public String ingredientsMilk(Model model, @PathVariable(name = "id") long id) {
-
-		model.addAttribute("id", id);
-
-		IngredientsMilk m = milkRepo.findOne(id);
-		model.addAttribute("milk", m);
-		return "ingredient_detail_m";
-
-	}
-
-	@GetMapping("/ingredients_m/{id}/edit")
-	public String ingredientsMilkEdit(Model model, @PathVariable(name = "id") long id) {
-
-		IngredientsMilk m = milkRepo.findOne(id);
-		model.addAttribute("milk", m);
-
-		model.addAttribute("id", id);
-		return "ingredient_edit_m";
-	}
-
-	@PostMapping("/ingredients_m/{id}/edit")
-	public String ingredientsMilkEditSave(@PathVariable(name = "id") long id,
-			@ModelAttribute @Valid IngredientsMilk milk, BindingResult result, Model model) {
-
-		if (result.hasErrors()) {
-			model.addAttribute("milk", milk);
-			return "ingredients_edit_m";
-
-		}
-		milkRepo.save(milk);
-		return "redirect:/ingredients_m/" + milk.getId();
-
-	}
-
-	@GetMapping("/ingredients_b/{id}")
-	public String ingredientsBooze(Model model, @PathVariable(name = "id") long id) {
-
-		model.addAttribute("id", id);
-
-		IngredientsAlcohol b = boozeRepo.findOne(id);
-		model.addAttribute("booze", b);
-		return "ingredient_detail_b";
-
-	}
-
-	@GetMapping("/ingredients_b/{id}/edit")
-	public String ingredientsBoozeEdit(Model model, @PathVariable(name = "id") long id) {
-
-		IngredientsAlcohol b = boozeRepo.findOne(id);
-		model.addAttribute("booze", b);
-
-		model.addAttribute("id", id);
-		return "ingredient_edit_b";
-	}
-	
-
-	@PostMapping("/ingredients_b/{id}/edit")
-	public String ingredientsAlcoholEditSave(@PathVariable(name = "id") long id,
-			@ModelAttribute @Valid IngredientsAlcohol booze, BindingResult result, Model model) {
-
-		if (result.hasErrors()) {
-			model.addAttribute("booze", booze);
-			return "ingredients_edit_b";
-
-		}
-		boozeRepo.save(booze);
-		return "redirect:/ingredients_b/" + booze.getId();
-
-	}
-	
-
-	@GetMapping("/ingredients_v/{id}")
-	public String ingredientsVeggies(Model model, @PathVariable(name = "id") long id) {
-
-		model.addAttribute("id", id);
-
-		IngredientsVeggies v = veggiesRepo.findOne(id);
-		model.addAttribute("veggies", v);
-		return "ingredient_detail_v";
-
-	}
-
-	@GetMapping("/ingredients_v/{id}/edit")
-	public String ingredientsVeggieEdit(Model model, @PathVariable(name = "id") long id) {
-
-		IngredientsVeggies v = veggiesRepo.findOne(id);
-		model.addAttribute("veggies", v);
-
-		model.addAttribute("id", id);
-		return "ingredient_edit_v";
-	}
-
-	@PostMapping("/ingredients_v/{id}/edit")
-	public String ingredientsVeggiesEditSave(@PathVariable(name = "id") long id,
-			@ModelAttribute @Valid IngredientsVeggies veggies, BindingResult result, Model model) {
-
-		if (result.hasErrors()) {
-			model.addAttribute("veggies", veggies);
-			return "ingredients_edit_v";
-
-		}
-		veggiesRepo.save(veggies);
-		return "redirect:/ingredients_v/" + veggies.getId();
-
-	}
-	
-	
-	@GetMapping("/ingredients/create")
-	public String ingredientCreate(@ModelAttribute @Valid IngredientsNew ingredient, Model model) {
-		model.addAttribute("ingredient", ingredient);
-		return "ingredient_create";
-	}
-	
-	@PostMapping("/ingredients/create")
-    public String ingredientCreateSave(@ModelAttribute @Valid IngredientsNew ingredient, Model model) {
-		
-        ingredientsNewRepo.save(ingredient);
-            return "redirect:/ingredients/";
-    }		
+//	@GetMapping(path = { "/ingredients" })
+//	public String ingredients(Model model) {
+//		model.addAttribute("ingredientsRole", ingredientRoleRepo.findAll());
+//		model.addAttribute("ingredients", ingredientsRepo.findByIngredientType("FRUIT"));		
+//		return "ingredients";
+//	}
+//
+//	@GetMapping("/ingredients/{id}")
+//	public String ingredients(Model model, @PathVariable(name = "id") long id) {
+//
+//		model.addAttribute("id", id);
+//
+//		Ingredients u = ingredientsRepo.findOne(id);
+//		model.addAttribute("ingredients", u);
+//
+//		return "ingredient_detail";
+//	}
+//
+//	@GetMapping("/ingredients/{id}/edit")
+//	public String ingredientEdit(Model model, @PathVariable(name = "id") long id) {
+//
+//		Ingredients u = ingredientsRepo.findOne(id);
+//		model.addAttribute("ingredients", u);
+//
+//		model.addAttribute("id", id);
+//		return "ingredient_edit";
+//	}
+//
+//	@PostMapping("/ingredients/{id}/edit")
+//	public String ingredientsEditSave(@PathVariable(name = "id") long id,
+//			@ModelAttribute @Valid Ingredients ingredients, BindingResult result, Model model) {
+//
+//		if (result.hasErrors()) {
+//			model.addAttribute("ingredients", ingredients);
+//			return "ingredients_edit";
+//
+//		}
+//		ingredientsRepo.save(ingredients);
+//		return "redirect:/ingredients/" + ingredients.getId();
+//
+//	}	
+//	
+//	@GetMapping("/ingredients/create")
+//	public String ingredientCreate(@ModelAttribute @Valid Ingredients ingredients, Model model) {
+//		return "ingredient_create";
+//	}
+//	
+//	@PostMapping("/ingredients/create")
+//    public String ingredientCreateSave(@ModelAttribute @Valid Ingredients ingredients, Model model) {
+//		
+//		log.info(ingredients.toString());
+//		
+//		Ingredients savedIngredient = ingredientsRepo.save(ingredients);		
+//		
+//			if(ingredients.getIngredientType() == "FRUIT"){
+//				IngredientRoles role = new IngredientRoles(savedIngredient, FRUIT);
+//				ingredientRoleRepo.save(role);
+//			}else if(ingredients.getIngredientType() == "VEGETABLE"){
+//				IngredientRoles role = new IngredientRoles(savedIngredient, VEGETABLE);
+//				ingredientRoleRepo.save(role);
+//			}else if(ingredients.getIngredientType() == "MILK"){
+//				IngredientRoles role = new IngredientRoles(savedIngredient, MILK);
+//				ingredientRoleRepo.save(role);
+//			}else if(ingredients.getIngredientType() == "YOGURT"){
+//				IngredientRoles role = new IngredientRoles(savedIngredient, YOGURT);
+//				ingredientRoleRepo.save(role);
+//			}else if(ingredients.getIngredientType() == "ALCOHOL"){
+//				IngredientRoles role = new IngredientRoles(savedIngredient, ALCOHOL);
+//				ingredientRoleRepo.save(role);
+//			}else{
+//				if(ingredients.getIngredientType() == null){
+//					log.error("Please Select An Ingredient Type");
+//				}
+//			}
+//		
+//		
+//        
+//            return "redirect:/ingredients/";
+//    }		
 
 	@GetMapping("/user/{id}")
 	public String user(Model model, @PathVariable(name = "id") long id) {

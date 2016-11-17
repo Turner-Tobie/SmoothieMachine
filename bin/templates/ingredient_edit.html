@@ -44,8 +44,18 @@
 					<option th:selected="*{instock} == false" value="false">Disabled</option>
 				</select>
 			</div>
-		
-			 
+			
+			<div>
+			 	
+				<select name="ingredientType">
+   					<option th:selected="*{ingredientType}" value="none">--- Select ---</option>
+				    <option th:selected="*{ingredientType}" value="FRUIT">Fruit</option>
+				    <option th:selected="*{ingredientType}" value="VEGETABLE">Vegetable</option>
+				    <option th:selected="*{ingredientType}" value="MILK">Milk</option>
+				    <option th:selected="*{ingredientType}" value="YOGURT">Yogurt</option>
+				    <option th:selected="*{ingredientType}" value="ALCOHOL">Alcohol</option>
+				</select>
+			 </div>		 
 			 
 			<button type="submit" class="btn btn-default">Submit</button>
 		</form>
