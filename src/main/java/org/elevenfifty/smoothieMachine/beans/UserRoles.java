@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.elevenfifty.smoothieMachine.beans.UserRoles;
+import org.elevenfifty.smoothieMachine.security.UserRole;
+
 
 @Entity
 @Table(name = "user_roles")
@@ -22,6 +24,22 @@ public class UserRoles {
 	
 	String role;
 	
+	public UserRoles(Users user, UserRole role) {
+		this.userId = user.getId();
+		this.role = role.toString().substring(role.toString().indexOf('_') + 1);
+	}
+
+
+	public UserRoles(long userId, String role) {
+		this.userId = userId;
+		this.role = role;
+	}
+
+	
+	@Override
+	public String toString() {
+		return "UserRoles [id=" + id + ", userId=" + userId + ", role=" + role + "]";
+	}
 	
 	
 	@Override

@@ -35,28 +35,28 @@ public class Users {
 
 	private boolean active;
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + (int) (id ^ (id >>> 32));
-		return result;
+	public Users() {
+		active = true;
 	}
 
+	public Users(String firstName, String lastName, String email, String phoneNumber, String password, boolean active) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		
+		this.phoneNumber = phoneNumber;
+		this.password = password;
+		this.active = active;
+	}
+	
+	
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Users other = (Users) obj;
-		if (id != other.id)
-			return false;
-		return true;
+	public String toString() {
+		return "Users [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
+				+ ", password=" + password + ", phoneNumber=" + phoneNumber + ", active=" + active + "]";
 	}
 
+	
 	public String getFirstName() {
 		return firstName;
 	}

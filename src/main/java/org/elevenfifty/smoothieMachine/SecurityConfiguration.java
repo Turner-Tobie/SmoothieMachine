@@ -17,22 +17,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity
-        .authorizeRequests().antMatchers("/h2-console/**").permitAll()
-        .and()
-        .authorizeRequests().antMatchers("/console/**").permitAll()
-        .and()
-        .authorizeRequests().antMatchers("/", "/user/**").authenticated().anyRequest().permitAll()
-        .and()
-        .formLogin().loginPage("/login").usernameParameter("username").passwordParameter("password")
-        .and()
-        .logout().logoutSuccessUrl("/login?logout")
-        .and()
-        .csrf().disable()
-        .headers().frameOptions().disable();
-		
-		
-		
-		//.anyRequest().permitAll().and().csrf().disable().headers().frameOptions().disable();
+				.authorizeRequests().antMatchers("/h2-console/**").permitAll()
+				.and()
+				.authorizeRequests().antMatchers("/login", "/register", "/user/create").permitAll()
+				.and()
+				.authorizeRequests().antMatchers("/login").permitAll()
+				.and()
+				.authorizeRequests().anyRequest().authenticated()
+				.and()
+				.formLogin().loginPage("/login").usernameParameter("username").passwordParameter("password")
+				.and()
+				.logout().logoutSuccessUrl("/login?logout")
+				.and()
+				.csrf().disable()
+				.headers().frameOptions().disable();
 	}
 	
 	@Autowired

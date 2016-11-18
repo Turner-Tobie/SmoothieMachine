@@ -1,5 +1,7 @@
 package org.elevenfifty.smoothieMachine.repository;
 
+import java.util.List;
+
 import org.elevenfifty.smoothieMachine.beans.UserImage;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -7,5 +9,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserImageRepository extends CrudRepository<UserImage, Long> {
 
-	UserImage findByUserId(Long id);
+	List<UserImage> findByUserId(long userId);
 }

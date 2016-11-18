@@ -13,10 +13,13 @@
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="#" th:href="@{/}">Home</a></li>
+					<li><a href="/ingredients">Ingredients</a></li>
+					<li><a href="/custom_smoothie">Create Smoothie</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right" sec:authorize="isAuthenticated()">
 					<li><a href="#" onclick="$('#logoutForm').submit();">Logout</a></li>
 					<li><a href="/user/create">New User</a></li>
+					
 				</ul>
 				<form th:action="@{/logout}" method="post" style="display: none;" id="logoutForm" sec:authorize="isAuthenticated()">
 		            <input type="submit" value="Log Out"/>

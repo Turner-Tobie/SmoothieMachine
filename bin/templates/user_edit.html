@@ -10,62 +10,48 @@
 		
 		<h1>Edit User</h1>
 		
-		<form method="POST" th:object="${user}" enctype="multipart/form-data">
-			<input type="hidden" name="id" th:field="*{id}"/>
+		<form th:action="@{|/user/${user.id}/edit|}"
+		enctype="multipart/form-data" method="POST">
+		<input name="id" type="hidden" th:value="${user.id}" />
+
+		<div class="field">
+			<label for="firstName">First Name</label> <input name="firstName"
+				type="text" th:value="${user.firstName}" />
+		</div>
+
+		<div class="field">
+			<label for="lastName">Last Name</label> <input name="lastName"
+				type="text" th:value="${user.lastName}" />
+		</div>
+
+		<div class="field">
+			<label for="email">Email</label> <input name="email" type="text"
+				th:value="${user.email}" />
+		</div>
 		
-			<div class="form-group">
-				<label for="firstName">First Name</label> 
-				<input type="text" name="firstName" class="form-control" placeholder="First Name" th:field="*{firstName}"/>
-				<span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First Name Error</span>
-			</div>
-			
-			<div class="form-group">
-				<label for="lastName">Last Name</label> 
-				<input type="text" name="lastName" class="form-control" placeholder="Last Name" th:field="*{lastName}"/>
-				<span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last Name Error</span>
-			</div>
-			
-			<div class="form-group">
-				<label for="email">Email</label> 
-				<input type="email" name="email" class="form-control" placeholder="email@domain.com" th:field="*{email}"/>
-				<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</span>
-			</div>
-			
-			<div class="form-group">
-				<label for="phoneNumber">Phone Number</label> 
-				<input type="text" name="phoneNumber" class="form-control" placeholder="3178675309" th:field="*{phoneNumber}"/>
-				<span th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}">Phone Number Error</span>
-			</div>
-			
-			<div class="form-group">
-				<label for="password">Password</label> 
-				<input type="password" name="password" class="form-control" th:field="*{password}"/>
-				<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</span>
-			</div>
-			
-			<div class="form-group">
-				<label for="active">Active</label> 
-				<select name="active">
-					<option th:selected="*{active} == true" value="true">Enabled</option>
-					<option th:selected="*{active} == false" value="false">Disabled</option>
-				</select>
-			</div>
-			
-			<div class="form-group">
-				<label for="exampleInputFile">File input</label> 
-				<input type="file" name="file"/>
-				<p class="help-block">Example block-level help text here.</p>
-			</div>
-			
-			<div class="form-group">
-				<label for="removeImage">Remove image?</label> 
-				<input type="checkbox" name="removeImage" value="true"/>
-			</div>
+		<div class="field">
+			<label for="password">Password</label> <input name="password"
+				type="password" th:value="${user.password}" />
+		</div>
+
+		<div class="field">
+			<label for="phoneNumber">Phone Number</label> <input
+				name="phoneNumber" type="text" th:value="${user.phoneNumber}" />
+		</div>
+
+		<div class="field">
+			<label for="file">Image</label> <input name="file" type="file" />
+		</div>
+
+		<div class="field">
+			<label for="removeImage">Remove Image?</label> <input
+				name="removeImage" type="checkbox" value="true" />
+		</div>
+
+		<input type="submit" th:value="Update" /> <a href="/"
+			th:href="@{|/user/${user.id}|}">Back</a>
+	</form>
 		
-			 
-			 
-			<button type="submit" class="btn btn-default">Submit</button>
-		</form>
 
 	</div>
 	

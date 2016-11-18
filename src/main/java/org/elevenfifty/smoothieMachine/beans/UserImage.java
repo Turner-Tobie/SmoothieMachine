@@ -29,28 +29,24 @@ public class UserImage {
 	@Lob
 	private byte[] image;
 	
-	
+	protected UserImage(){}
+
+	public UserImage(long userId) {
+		this.userId = userId;
+	}
+
+	public UserImage(long userId, String contentType, byte[] image) {
+		this.userId = userId;
+		this.contentType = contentType;
+		this.image = image;
+	}
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + (int) (id ^ (id >>> 32));
-		return result;
+	public String toString() {
+		return "UserImage [id=" + id + ", userId=" + userId + ", contentType=" + contentType + "]";
 	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		UserImage other = (UserImage) obj;
-		if (id != other.id)
-			return false;
-		return true;
-	}
+	
+	
 	public long getId() {
 		return id;
 	}

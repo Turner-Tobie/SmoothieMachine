@@ -1,52 +1,59 @@
 package org.elevenfifty.smoothieMachine.controller;
 
-import java.io.IOException;
 
-import javax.management.relation.Role;
+import java.util.List;
+import java.util.Optional;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import static org.elevenfifty.smoothieMachine.security.IngredientRole.FRUIT;
-import static org.elevenfifty.smoothieMachine.security.IngredientRole.ALCOHOL;
-import static org.elevenfifty.smoothieMachine.security.IngredientRole.MILK;
-import static org.elevenfifty.smoothieMachine.security.IngredientRole.VEGETABLE;
-import static org.elevenfifty.smoothieMachine.security.IngredientRole.YOGURT;
+import static org.elevenfifty.smoothieMachine.security.UserRole.USER;
 
-import org.elevenfifty.smoothieMachine.beans.IngredientRoles;
-import org.elevenfifty.smoothieMachine.beans.Ingredients;
 import org.elevenfifty.smoothieMachine.beans.UserImage;
+import org.elevenfifty.smoothieMachine.beans.UserRoles;
 import org.elevenfifty.smoothieMachine.beans.Users;
-import org.elevenfifty.smoothieMachine.repository.IngredientRepository;
-import org.elevenfifty.smoothieMachine.repository.IngredientRoleRepository;
 import org.elevenfifty.smoothieMachine.repository.UserImageRepository;
 import org.elevenfifty.smoothieMachine.repository.UserRepository;
+import org.elevenfifty.smoothieMachine.repository.UserRoleRepository;
+import org.elevenfifty.smoothieMachine.security.PermissionService;
+import org.elevenfifty.smoothieMachine.service.ImageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
+
+
+
+
 
 @Controller
 public class IndexController {
 
 	@Autowired
-	private UserRepository userRepo;
+	private UserRepository userRepo;	
 	
 	@Autowired
-	private IngredientRepository ingredientsRepo;
+	private UserImageRepository userImageRepo;	
 	
 	@Autowired
-	private UserImageRepository userImageRepo;
+	private UserRoleRepository userRoleRepo;
 	
 	@Autowired
-	private IngredientRoleRepository ingredientRoleRepo;
+	private ImageService imageService;
+	
+	@Autowired
+	private PermissionService permissionService;
 
 	
 	@GetMapping("")
@@ -57,13 +64,13 @@ public class IndexController {
 
 	@GetMapping(path = { "/home", "/", "" })
 	public String home(Model model) {
-		model.addAttribute("users", userRepo.findAll());
+		model.addAttribute("users", userRepo.findAllByOrderByFirstNameAscLastNameAsc());
 		return "home";
 	}
 
-	@GetMapping("/login")
-	public String login(Model model) {
-		return "login";
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public ModelAndView getLoginPage(@RequestParam Optional<String> error) {
+		return new ModelAndView("login", "error", error);
 	}
 
 	@GetMapping(path = { "/users" })
@@ -72,152 +79,55 @@ public class IndexController {
 		return "home";
 	}
 
-//	@GetMapping(path = { "/ingredients" })
-//	public String ingredients(Model model) {
-//		model.addAttribute("ingredientsRole", ingredientRoleRepo.findAll());
-//		model.addAttribute("ingredients", ingredientsRepo.findByIngredientType("FRUIT"));		
-//		return "ingredients";
-//	}
-//
-//	@GetMapping("/ingredients/{id}")
-//	public String ingredients(Model model, @PathVariable(name = "id") long id) {
-//
-//		model.addAttribute("id", id);
-//
-//		Ingredients u = ingredientsRepo.findOne(id);
-//		model.addAttribute("ingredients", u);
-//
-//		return "ingredient_detail";
-//	}
-//
-//	@GetMapping("/ingredients/{id}/edit")
-//	public String ingredientEdit(Model model, @PathVariable(name = "id") long id) {
-//
-//		Ingredients u = ingredientsRepo.findOne(id);
-//		model.addAttribute("ingredients", u);
-//
-//		model.addAttribute("id", id);
-//		return "ingredient_edit";
-//	}
-//
-//	@PostMapping("/ingredients/{id}/edit")
-//	public String ingredientsEditSave(@PathVariable(name = "id") long id,
-//			@ModelAttribute @Valid Ingredients ingredients, BindingResult result, Model model) {
-//
-//		if (result.hasErrors()) {
-//			model.addAttribute("ingredients", ingredients);
-//			return "ingredients_edit";
-//
-//		}
-//		ingredientsRepo.save(ingredients);
-//		return "redirect:/ingredients/" + ingredients.getId();
-//
-//	}	
-//	
-//	@GetMapping("/ingredients/create")
-//	public String ingredientCreate(@ModelAttribute @Valid Ingredients ingredients, Model model) {
-//		return "ingredient_create";
-//	}
-//	
-//	@PostMapping("/ingredients/create")
-//    public String ingredientCreateSave(@ModelAttribute @Valid Ingredients ingredients, Model model) {
-//		
-//		log.info(ingredients.toString());
-//		
-//		Ingredients savedIngredient = ingredientsRepo.save(ingredients);		
-//		
-//			if(ingredients.getIngredientType() == "FRUIT"){
-//				IngredientRoles role = new IngredientRoles(savedIngredient, FRUIT);
-//				ingredientRoleRepo.save(role);
-//			}else if(ingredients.getIngredientType() == "VEGETABLE"){
-//				IngredientRoles role = new IngredientRoles(savedIngredient, VEGETABLE);
-//				ingredientRoleRepo.save(role);
-//			}else if(ingredients.getIngredientType() == "MILK"){
-//				IngredientRoles role = new IngredientRoles(savedIngredient, MILK);
-//				ingredientRoleRepo.save(role);
-//			}else if(ingredients.getIngredientType() == "YOGURT"){
-//				IngredientRoles role = new IngredientRoles(savedIngredient, YOGURT);
-//				ingredientRoleRepo.save(role);
-//			}else if(ingredients.getIngredientType() == "ALCOHOL"){
-//				IngredientRoles role = new IngredientRoles(savedIngredient, ALCOHOL);
-//				ingredientRoleRepo.save(role);
-//			}else{
-//				if(ingredients.getIngredientType() == null){
-//					log.error("Please Select An Ingredient Type");
-//				}
-//			}
-//		
-//		
-//        
-//            return "redirect:/ingredients/";
-//    }		
+		
 
-	@GetMapping("/user/{id}")
-	public String user(Model model, @PathVariable(name = "id") long id) {
+	@GetMapping("/user/{userId}")
+	public String user(Model model, @PathVariable long userId) {
 
-		model.addAttribute("id", id);
+		model.addAttribute("user", userRepo.findOne(userId));
 
-		Users u = userRepo.findOne(id);
-		model.addAttribute("user", u);
+		
 
-		UserImage i = userImageRepo.findByUserId(id);
-		model.addAttribute("userImage", i);
-
+		List<UserImage> images = userImageRepo.findByUserId(userId);
+		if (!CollectionUtils.isEmpty(images)) {
+			model.addAttribute("userImage", images.get(0));
+		}
+		model.addAttribute("permissions", permissionService);
 		return "user_detail";
 	}
 
-	@GetMapping("/user/{id}/edit")
-	public String userEdit(Model model, @PathVariable(name = "id") long id) {
+	@GetMapping("/user/{userId}/edit")
+	public String userEdit(Model model, @PathVariable long userId) {
 
-		Users u = userRepo.findOne(id);
-
-		model.addAttribute("user", u);
-
-		model.addAttribute("id", id);
+		model.addAttribute("user", userRepo.findOne(userId));
+		
+		
+		
+		List<UserImage> images = userImageRepo.findByUserId(userId);
+		if (!CollectionUtils.isEmpty(images)) {
+			model.addAttribute("userImage", images.get(0));
+		}
 		return "user_edit";
 	}
 
 	private static final Logger log = LoggerFactory.getLogger(IndexController.class);
 
-	@PostMapping("/user/{id}/edit")
-	public String userEditSave(@PathVariable(name = "id") long id, @ModelAttribute @Valid Users user,
-			BindingResult result, Model model, @RequestParam("file") MultipartFile file,
-			@RequestParam(name = "removeImage", defaultValue = "false", required = false) boolean removeImage) {
+	@PostMapping("/user/{userId}/edit")
+	public String userEditSave(@ModelAttribute Users user,
+			@PathVariable long userId,
+			@RequestParam(name = "removeImage", defaultValue = "false") boolean removeImage,
+			@RequestParam("file") MultipartFile file,
+			Model model) {
 
-		if (result.hasErrors()) {
-			model.addAttribute("user", user);
-			return "user_edit";
+		
+		log.debug("Saving user " + user);
+		userRepo.save(user);
+		model.addAttribute("message", "User " + user.getEmail() + " saved.");
 
+		if (removeImage) {
+			imageService.deleteImage(user);
 		} else {
-			if (removeImage) {
-				UserImage image = userImageRepo.findByUserId(id);
-				if (image != null) {
-					// remove if it exists
-					userImageRepo.delete(image);
-					log.info("User Image Removed");
-				}
-			} else if (file != null && !file.isEmpty()) {
-				try {
-					// Load file into proper format(Spring does this!)
-
-					// Load or Create UserImage
-					UserImage image = userImageRepo.findByUserId(id);
-					// UserImage image = userImageRepo.findByUserId(id);
-					if (image == null) {
-						image = new UserImage();
-						image.setUserId(id);
-					}
-					image.setContentType(file.getContentType());
-					image.setImage(file.getBytes());
-					// Store in the database
-					userImageRepo.save(image);
-					userRepo.save(user);
-				} catch (IOException e) {
-					log.error("Failed to upload file", e);
-				}
-
-			}
-
+			imageService.saveImage(file, user);
 		}
 		userRepo.save(user);
 		return "redirect:/user/" + user.getId();
@@ -226,17 +136,29 @@ public class IndexController {
 
 	}
 	
+	@RequestMapping("/register")
+	public String register(Model model) {
+	return "user_create";
+}
+	
 	@GetMapping("/user/create")
 	public String userCreate(@ModelAttribute @Valid Users user, Model model) {
-		
+		model.addAttribute("user", new Users());
 		return "user_create";
 	}
 	
 	@PostMapping("/user/create")
-    public String userCreateSave(@ModelAttribute @Valid Users user, Model model) {
+    public String userCreateSave(@ModelAttribute Users user,
+			@RequestParam("file") MultipartFile file, Model model) {
 
-        userRepo.save(user);
-            return "redirect:/user/" + user.getId();
+		log.info(user.toString());
+		
+		Users savedUser = userRepo.save(user);
+		UserRoles role = new UserRoles(savedUser, USER);
+        userRoleRepo.save(role);
+        imageService.saveImage(file, savedUser);
+        
+            return user(model, savedUser.getId());
     }
 	
 	
